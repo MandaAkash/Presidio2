@@ -1,0 +1,136 @@
+/* General reset */
+body {
+  margin: 0;
+  font-family: Arial, sans-serif;
+}
+
+/* Container holding the cards */
+.properties-container {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); /* Adjusted for responsiveness */
+  gap: 20px; /* Adjust the gap between cards as needed */
+  padding: 20px; /* Adjust the padding around the container as needed */
+}
+
+/* Each card styling */
+.card {
+  background-color: #fff;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  padding: 20px;
+  text-align: center;
+}
+
+.card img {
+  width: 100%;
+  height: 150px;
+  object-fit: cover;
+  border-radius: 8px 8px 0 0;
+}
+
+.card h3 {
+  margin: 15px 0 10px;
+}
+
+.card p {
+  margin: 5px 0;
+}
+
+.card button {
+  margin: 10px 5px;
+  padding: 10px 20px;
+  border: none;
+  background-color: #007bff;
+  color: #fff;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.card button:hover {
+  background-color: #0056b3;
+}
+
+/* Form styling when updating a property */
+form {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  margin-top: 10px;
+}
+
+form input {
+  padding: 10px;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+}
+
+form button {
+  padding: 10px;
+  border: none;
+  background-color: #28a745;
+  color: #fff;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+form button:hover {
+  background-color: #218838;
+}
+
+/* Pagination styling */
+.pagination {
+  margin-top: 20px;
+  display: flex;
+  justify-content: center;
+}
+
+.pagination button {
+  margin: 0 5px;
+  padding: 5px 10px;
+  border: none;
+  cursor: pointer;
+  background-color: #007bff;
+  color: #fff;
+  border-radius: 5px;
+}
+
+.pagination button:hover {
+  background-color: #0056b3;
+}
+
+.pagination button[disabled] {
+  background-color: #ccc;
+  cursor: not-allowed;
+}
+
+.pagination .arrow {
+  margin: 0 5px;
+  padding: 5px;
+  border: none;
+  cursor: pointer;
+  background-color: #007bff;
+  color: #fff;
+  border-radius: 5px;
+}
+
+.pagination .arrow:hover {
+  background-color: #0056b3;
+}
+
+/* Responsive adjustments */
+@media only screen and (max-width: 768px) {
+  .card {
+    padding: 15px; /* Adjusted padding for smaller screens */
+  }
+
+  form {
+    margin-top: 5px; /* Adjusted margin for smaller screens */
+  }
+}
+
+@media only screen and (max-width: 480px) {
+  .properties-container {
+    grid-template-columns: 1fr; /* Adjusted for single column layout on smaller screens */
+  }
+}

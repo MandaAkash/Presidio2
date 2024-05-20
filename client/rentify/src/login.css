@@ -1,0 +1,69 @@
+/* General reset and styles */
+body {
+  font-family: Arial, sans-serif;
+  margin: 0;
+  padding: 0;
+  height: 100vh; /* Adjusted to full viewport height */
+  display: flex; /* Centering the login container */
+  justify-content: center; /* Centering the login container */
+  align-items: center; /* Centering the login container */
+  overflow-x: hidden; /* Prevent horizontal scrolling */
+}
+
+.login-container {
+  text-align: center;
+}
+
+.box {
+  padding: 30px;
+  border: 2px solid black;
+  border-radius: 10px;
+  transition: box-shadow 0.3s ease;
+  width: 80%; /* Adjusted width for responsiveness */
+  max-width: 400px; /* Added max-width for better readability */
+  margin: 28% auto; /* Centering horizontally */
+}
+
+.login-container.hovered .box {
+  box-shadow: 0 0 20px rgba(0, 0, 0, 0.208);
+}
+
+.login-input {
+  height: 30px;
+  width: calc(100% - 30px); /* Adjusted width for responsiveness */
+  max-width: 300px; /* Added max-width to prevent stretching on larger screens */
+  border-radius: 30px;
+  padding: 0 15px;
+  border: 1px solid #ccc;
+  margin-bottom: 15px; /* Added margin for better separation */
+}
+
+.login-button {
+  padding: 10px 20px;
+  border-radius: 20px;
+  cursor: pointer;
+  background-color: #007bff;
+  color: #fff;
+  border: none;
+  width: 100%; 
+  max-width: 200px; 
+  transition: background-color 0.3s; 
+
+}
+
+.login-button:hover {
+  background-color: #0056b3;
+}
+
+.login-container p {
+  margin-top: 20px;
+}
+
+.login-container a {
+  color: #007bff;
+  text-decoration: none;
+}
+
+.login-container a:hover {
+  text-decoration: underline;
+}
