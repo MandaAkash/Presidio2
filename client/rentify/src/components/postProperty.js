@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import '../PostProperty.css'; // Import the CSS file
 import { Link } from 'react-router-dom';
+
 const PostProperty = ({ user }) => {
   const [formData, setFormData] = useState({
     email: '',
@@ -13,16 +14,8 @@ const PostProperty = ({ user }) => {
     nearbyHospitals: '',
     nearbyColleges: '',
   });
+  const [loading, setLoading] = useState(false); // State to track loading
   const navigate = useNavigate();
-
-  useEffect(() => {
-    if (user) {
-      setFormData(prevFormData => ({
-        ...prevFormData,
-        seller: user._id,  // Update to user ID
-      }));
-    }
-  }, [user]);
 
   const handleChange = (e) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
@@ -30,12 +23,14 @@ const PostProperty = ({ user }) => {
 
   const handleClick = async (e) => {
     e.preventDefault();
+    setLoading(true); // Set loading to true when posting starts
   
     const requiredFields = ['place', 'area', 'bedrooms', 'bathrooms', 'nearbyHospitals', 'nearbyColleges'];
     const isEmptyField = requiredFields.some(field => !formData[field]);
   
     if (isEmptyField) {
       alert('Please fill in all required fields');
+      setLoading(false); // Set loading to false if validation fails
       return;
     }
   
@@ -52,7 +47,7 @@ const PostProperty = ({ user }) => {
   
     console.log(JSON.stringify(submitData));
     try {
-      const response = await fetch('http://localhost:5000/properties', {
+      const response = await fetch('https://presidio2.onrender.com/properties', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -78,6 +73,8 @@ const PostProperty = ({ user }) => {
       });
     } catch (err) {
       console.error('Error:', err);
+    } finally {
+      setLoading(false); // Set loading to false when posting ends
     }
   };
   
@@ -93,6 +90,7 @@ const PostProperty = ({ user }) => {
           onChange={handleChange}
           className="post-property-input"
           required
+          disabled={loading} // Disable input while loading
         /><br/>
         <input
           type="number"
@@ -102,6 +100,7 @@ const PostProperty = ({ user }) => {
           onChange={handleChange}
           className="post-property-input"
           required
+          disabled={loading} // Disable input while loading
         /><br/>
         <input
           type="number"
@@ -111,6 +110,7 @@ const PostProperty = ({ user }) => {
           onChange={handleChange}
           className="post-property-input"
           required
+          disabled={loading} // Disable input while loading
         /><br/>
         <input
           type="number"
@@ -120,6 +120,7 @@ const PostProperty = ({ user }) => {
           onChange={handleChange}
           className="post-property-input"
           required
+          disabled={loading} // Disable input while loading
         /><br/>
         <input
           type="text"
@@ -129,6 +130,7 @@ const PostProperty = ({ user }) => {
           onChange={handleChange}
           className="post-property-input"
           required
+          disabled={loading} // Disable input while loading
         /><br/>
         <input
           type="text"
@@ -138,19 +140,22 @@ const PostProperty = ({ user }) => {
           onChange={handleChange}
           className="post-property-input"
           required
+          disabled={loading} // Disable input while loading
         /><br/>
         <button
           type="button"
           onClick={handleClick}
           className="post-property-button"
+          disabled={loading} // Disable button while loading
         >
-          Post Property
+          {loading ? 'Posting...' : 'Post Property'}
         </button>
       </form>
       <button
         type="button"
         onClick={() => navigate('/manage')}
         className="manage-properties-button"
+        disabled={loading} // Disable button while loading
       >
         See all your properties
       </button>

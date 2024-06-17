@@ -15,11 +15,11 @@ function App() {
       <Router>
         <Routes>
           <Route path='/' element={<Home loggedIn={loggedIn} setLoggedIn={setLoggedIn}/>}/>
-          <Route path="/login" element={<Login setLoggedIn={setLoggedIn} />} />
-          <Route path="/buyer" element={<Buyer/>} />
-          <Route path="/manage" element={<ManageProperties />} />
-          <Route path="/property" element={<PostProperty/>}/>
-          <Route path="/register" element={<RegisterUser />} />
+          <Route path="/login" element={!loggedIn&&<Login setLoggedIn={setLoggedIn} />} />
+          <Route path="/buyer" element={loggedIn?(<Buyer/>):(<PostProperty/>)} />
+          <Route path="/manage" element={loggedIn?(<ManageProperties />):(<PostProperty/>)} />
+          <Route path="/property" element={loggedIn?(<PostProperty/>):(<PostProperty/>)}/>
+          <Route path="/register" element={!loggedIn?(<RegisterUser />):(<PostProperty/>)} />
         </Routes>
       </Router>
     </div>

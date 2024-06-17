@@ -12,7 +12,7 @@ const Buyer = () => {
   useEffect(() => {
     const fetchProperties = async () => {
       try {
-        const response = await fetch('http://localhost:5000/properties');
+        const response = await fetch('https://presidio2.onrender.com/properties');
         const data = await response.json();
         setFilteredProperties(data);
       } catch (error) {
@@ -32,7 +32,7 @@ const Buyer = () => {
 
   const handleInterestClick = async (propertyId) => {
     try {
-      const response = await fetch(`http://localhost:5000/properties/${propertyId}/seller`);
+      const response = await fetch(`https://presidio2.onrender.com/properties/${propertyId}/seller`);
       const sellerDetails = await response.json();
       setInterested(true);
       setDetails(sellerDetails[0]);

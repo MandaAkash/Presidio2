@@ -17,7 +17,7 @@ const ManageProperties = () => {
     const fetchProperties = async () => {
       try {
         const email = localStorage.getItem('email');
-        const response = await fetch(`http://localhost:5000/properties/seller/${email}`);
+        const response = await fetch(`https://presidio2.onrender.com/properties/seller/${email}`);
         const data = await response.json();
         setProperties(data);
       } catch (err) {
@@ -29,7 +29,7 @@ const ManageProperties = () => {
 
   const deleteProperty = async (id) => {
     try {
-      await fetch(`http://localhost:5000/properties/${id}`, { method: 'DELETE' });
+      await fetch(`https://presidio2.onrender.com/properties/${id}`, { method: 'DELETE' });
       setProperties(properties.filter((property) => property._id !== id));
     } catch (err) {
       console.error(err);
@@ -45,7 +45,7 @@ const ManageProperties = () => {
 
   const updateProperty = async (id) => {
     try {
-      const response = await fetch(`http://localhost:5000/properties/${id}`, {
+      const response = await fetch(`https://presidio2.onrender.com/properties/${id}`, {
         method: 'PUT',
         headers: {
           'Content-Type': 'application/json',
@@ -54,9 +54,7 @@ const ManageProperties = () => {
       });
       if (response.ok) {
         const updatedProperty = await response.json();
-        // Update the property in the properties state
         setProperties(properties.map(property => property._id === id ? updatedProperty : property));
-        // Reset the updatingPropertyId state
         setUpdatingPropertyId(null);
       }
     } catch (err) {

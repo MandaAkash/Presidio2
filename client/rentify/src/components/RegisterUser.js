@@ -1,8 +1,7 @@
-// RegisterUser.js
-
 import React, { useState } from 'react';
 import '../RegisterUser.css'; // Import the CSS file
 import { Link } from 'react-router-dom';
+
 const RegisterUser = () => {
   const [formData, setFormData] = useState({
     firstName: '',
@@ -12,14 +11,17 @@ const RegisterUser = () => {
     createpassword: '',
   });
 
+  const [loading, setLoading] = useState(false); // State to track loading
+
   const handleChange = (e) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
   };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    setLoading(true); // Set loading to true when registration starts
     try {
-      const response = await fetch('http://localhost:5000/users/', {
+      const response = await fetch('https://presidio2.onrender.com/users/', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -42,6 +44,8 @@ const RegisterUser = () => {
       });
     } catch (err) {
       console.error(err);
+    } finally {
+      setLoading(false); // Set loading to false when registration ends
     }
   };
 
@@ -59,6 +63,7 @@ const RegisterUser = () => {
             value={formData.firstName}
             onChange={handleChange}
             required
+            disabled={loading} // Disable input while loading
           /><br />
           <input
             type="text"
@@ -67,6 +72,7 @@ const RegisterUser = () => {
             value={formData.lastName}
             onChange={handleChange}
             required
+            disabled={loading} // Disable input while loading
           /><br />
           <input
             type="email"
@@ -76,6 +82,7 @@ const RegisterUser = () => {
             onChange={handleChange}
             autoComplete="new-password"
             required
+            disabled={loading} // Disable input while loading
           /><br />
           <input
             type="tel"
@@ -84,6 +91,7 @@ const RegisterUser = () => {
             value={formData.phoneNumber}
             onChange={handleChange}
             required
+            disabled={loading} // Disable input while loading
           /><br />
           <input
             type="password"
@@ -93,12 +101,13 @@ const RegisterUser = () => {
             value={formData.createpassword}
             onChange={handleChange}
             required
+            disabled={loading} // Disable input while loading
           /><br />
-          <button type="submit" className="register-button">Register</button>
-          
-    <p>Already registered? <Link to='/'>Login</Link></p>
+          <button type="submit" className="register-button" disabled={loading}>
+            {loading ? 'Registering...' : 'Register'}
+          </button>
+          <p>Already registered? <Link to='/'>Login</Link></p>
         </div>
-        
       </form>
     </div>
   );

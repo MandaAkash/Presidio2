@@ -1,4 +1,3 @@
-
 import React, { useState } from 'react';
 import '../login.css'; // Import the CSS file
 import { Link } from 'react-router-dom';
@@ -7,11 +6,13 @@ const Login = ({ setLoggedIn }) => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [boxHovered, setBoxHovered] = useState(false); // State to track box hover
+  const [loading, setLoading] = useState(false); // State to track loading
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    setLoading(true); // Set loading to true when login starts
     try {
-      const response = await fetch('http://localhost:5000/login', {
+      const response = await fetch('https://presidio2.onrender.com/login', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -30,6 +31,8 @@ const Login = ({ setLoggedIn }) => {
       }
     } catch (err) {
       alert(err);
+    } finally {
+      setLoading(false); // Set loading to false when login ends
     }
   };
 
@@ -54,9 +57,11 @@ const Login = ({ setLoggedIn }) => {
             className="login-input"
             required
           /><br />
-          <button type="submit" className="login-button" >Login</button>
+          <button type="submit" className="login-button" disabled={loading}>
+            {loading ? 'Logging in...' : 'Login'}
+          </button>
         </form>
-        <div ><p>Not yet registered? <Link to="/register">Register now</Link></p></div>
+        <div><p>Not yet registered? <Link to="/register">Register now</Link></p></div>
       </div>
     </div>
   );
